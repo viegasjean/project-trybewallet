@@ -1,7 +1,7 @@
 import propTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
-import userAction from '../actions';
+import { userAction } from '../actions';
 
 const PASS_LEN = 6;
 const EMAIL_REGEX = /\S+@\S+\.\S+/;

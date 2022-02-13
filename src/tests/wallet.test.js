@@ -66,7 +66,7 @@ describe('3 - Crie um header para a página de carteira contendo as seguintes ca
   });
 });
 
-describe('4 - Desenvolva um formulário para adicionar uma despesa contendo as seguintes características:', () => {
+describe.only('4 - Desenvolva um formulário para adicionar uma despesa contendo as seguintes características:', () => {
   test('Um campo para adicionar o valor da despesa', async () => {
     renderWithRouterAndStore(<Wallet />, '/carteira');
     const valueInput = await screen.findByTestId(VALUE_INPUT_TEST_ID);
@@ -265,14 +265,14 @@ describe('8 - Crie um botão para deletar uma despesa da tabela contendo as segu
     renderWithRouterAndStore(<Wallet />, '/carteira', initial);
     const lastButton = document.getElementsByTagName('tr')[1].lastChild.lastChild;
     expect(lastButton).toBeInTheDocument();
-    expect(lastButton.dataset.testid).toBe(BTN_DELETE_TEST_ID);    
+    expect(lastButton.dataset.testid).toBe(BTN_DELETE_TEST_ID);
   });
-  
+
   test('Ao ser clicado, o botão deleta a linha da tabela, alterando o estado global.', () => {
     const { store } = renderWithRouterAndStore(<Wallet />, '/carteira', initial);
     const deleteBtn = screen.getAllByTestId(BTN_DELETE_TEST_ID)[0];
     const lineDeleted = document.getElementsByTagName('tr')[1];
-    
+
     fireEvent.click(deleteBtn);
     expect(lineDeleted).not.toBeInTheDocument();
 
@@ -298,17 +298,17 @@ describe('8 - Crie um botão para deletar uma despesa da tabela contendo as segu
 
     expect(store.getState().wallet.expenses).toStrictEqual(newExpenses);
   });
-  
+
   test('Ao clicar no botão para remover uma despesa, o valor correspondente deve ser subtraído e a despesa total deve ser atualizada no header', () => {
     const { store } = renderWithRouterAndStore(<Wallet />, '/carteira', initial);
-    
+
     const totalField = screen.getByTestId(TOTAL_FIELD_TEST_ID);
     expect(totalField).toContainHTML('187.12');
-    
+
     const deleteBtn = screen.getAllByTestId(BTN_DELETE_TEST_ID)[0];
-    
+
     fireEvent.click(deleteBtn);
-    
+
     const newExpenses = [
       {
         id: 1,
@@ -320,9 +320,9 @@ describe('8 - Crie um botão para deletar uma despesa da tabela contendo as segu
         exchangeRates: mockData,
       },
     ];
-    
+
     expect(store.getState().wallet.expenses).toStrictEqual(newExpenses);
-    
+
     expect(totalField).toContainHTML('131.37');
   });
 });
