@@ -23,8 +23,15 @@ class Form extends React.Component {
     const { dispatchSetValue, exchangeRates, fetchCurrencies } = this.props;
     const { id, value, description, currency, method, tag, total } = this.state;
     fetchCurrencies();
+
     dispatchSetValue({
-      id, value, currency, method, tag, description, exchangeRates,
+      id,
+      value,
+      currency,
+      method,
+      tag,
+      description,
+      exchangeRates,
     });
     this.setState({
       id: id + 1,
