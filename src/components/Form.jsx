@@ -43,7 +43,7 @@ class Form extends React.Component {
   }
 
   render() {
-    const { email } = this.props;
+    const { email, exchangeRates } = this.props;
     const { total, value } = this.state;
     return (
       <div>
@@ -87,8 +87,9 @@ class Form extends React.Component {
               data-testid="currency-input"
               onChange={ this.handleChange }
             >
-              <option>USD</option>
-              <option>EUR</option>
+              { Object.keys(exchangeRates).map((currency) => (
+                currency !== 'USDT' && <option key={ currency }>{ currency }</option>
+              )) }
             </select>
           </label>
 
